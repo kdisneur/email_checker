@@ -1,8 +1,6 @@
 machine:
   environment:
     PATH: "$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
-  services:
-    - redis
 dependencies:
   cache_directories:
     - ~/.asdf
