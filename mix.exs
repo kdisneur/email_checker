@@ -7,6 +7,8 @@ defmodule EmailChecker.Mixfile do
      elixir: "~> 1.0",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: description,
+     package: package,
      deps: deps]
   end
 
@@ -29,6 +31,29 @@ defmodule EmailChecker.Mixfile do
   defp deps do
     [
       {:socket, "~> 0.3.1"},
+    ]
+  end
+
+  defp description do
+    """
+    Simple library checking the validity of an email. Checks are performed in the following order:
+
+    - REGEX: validate the emails has a good looking format
+
+    - MX: validate the domain sever contains MX records
+
+    - SMTP: validate the SMTP behind the MX records knows this email address (no email sent)
+    """
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      maintainers: ["Kevin Disneur"],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/kdisneur/email_checker"
+      }
     ]
   end
 end
