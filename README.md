@@ -1,5 +1,7 @@
 # EmailChecker
 
+[![Circle CI](https://circleci.com/gh/kdisneur/email_checker/tree/master.svg?style=svg)](https://circleci.com/gh/kdisneur/email_checker/tree/master)
+
 Simple library checking the validity of an email. Checks are performed in the
 following order:
 
