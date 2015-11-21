@@ -18,21 +18,8 @@ defmodule EmailChecker.MX do
   defp lookup_all(domain_name) do
     domain_name
     |> String.to_char_list
-    |> retry_on_empty(fn (domain_name) -> :inet_res.lookup(domain_name, :in, :mx) end, 10)
+    |> :inet_res.lookup(:in, :mx)
     |> normalize_mx_records_to_string
-  end
-
-  def retry_on_empty(_domain_name, _function, retry) when retry == 0 do
-    []
-  end
-  def retry_on_empty(domain_name, function, retry) when retry > 0 do
-    case function.(domain_name) do
-      [] ->
-        :timer.sleep(500)
-        retry_on_empty(domain_name, function, retry - 1)
-      mx_domains ->
-        mx_domains
-    end
   end
 
   defp normalize_mx_records_to_string(nil) do

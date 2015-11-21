@@ -3,7 +3,7 @@ defmodule EmailChecker.Mixfile do
 
   def project do
     [app: :email_checker,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.0",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -16,7 +16,10 @@ defmodule EmailChecker.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger, :socket]]
+    [
+      mod: {EmailChecker.Loader, []},
+      applications: [:logger, :socket]
+    ]
   end
 
   # Dependencies can be Hex packages:
