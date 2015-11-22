@@ -1,4 +1,9 @@
-## v0.0.2 (2015-11-20)
+## v0.0.3 (2015-11-22)
+
+* Fix a bug when the SMTP doesn't reply
+* Fix a bug when the socket is unexpectedly closed
+
+## v0.0.2 (2015-11-21)
 
 * Speedup the library: Remove a retry loop (hack) when MX lookup was empty
 * Add a configuration entry for the default DNS used
