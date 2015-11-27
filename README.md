@@ -19,14 +19,18 @@ all emails using this domain seems valid even if they are not.
 # mix.exs
 def application do
   [mod: {YourModule, []},
-   applications: [..., email_checker, ...]
+   applications: [
+     # other applications...
+     :email_checker,
+     # other applications...
+     ]
   ]
 end
 
 def deps do
   [
-    # otherdependecies...
-    {:email_checker, "~> 0.0.2"}
+    # other dependencies...
+    {:email_checker, "~> 0.0.3"}
     # other dependencies...
   ]
 end
@@ -36,13 +40,14 @@ end
 
 We need to manually load DNS records to validate if a MX exists or not. When
 we load the library Erlang doesn't have its DNS record list yet. So to avoid
-any problem, we define a default DNS. By default the value is : `4.2.2.1`.
+any problem, we define a default DNS. By default the value is : `4,2,2,1` (note
+that tuples are separated by commas).
 
-You can easily overide this value:
+You can easily override this value:
 
 ```elixir
 # config/config.exs
-config: :email_checker, default_dns: {4.2.2.1}
+config :email_checker, default_dns: {4,2,2,1}
 ```
 
 ### Usage
