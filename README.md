@@ -38,16 +38,38 @@ end
 
 ### Configuration
 
+```elixir
+# config/config.exs -- default
+config :email_checker,
+  default_dns: {8, 8, 8, 8},
+  smtp_retries: 2,
+  timeout_milliseconds: :infinity
+```
+
 We need to manually load DNS records to validate if a MX exists or not. When
 we load the library Erlang doesn't have its DNS record list yet. So to avoid
-any problem, we define a default DNS. By default the value is : `4,2,2,1` (note
-that tuples are separated by commas).
+any problem, we define a default DNS. By default the value is : `{8,8,8,8}`, which
+is Google's primary public DNS server. Please note that the IP address is
+represented as a tuple separated by commas.
 
-You can easily override this value:
+The SMTP validation strategy will attempt 2 retries, by default.
+
+The MX and SMTP validation strategies, each in their own way, use the same
+default timeout for net connections as the underlying Erlang library calls. It
+is important to note that this value is `:infinity`, and the call will take as
+long as the call takes. You likely want to set to a sensible timeout in
+milliseconds. Please note that:
+
+ * For the MX validation, this is the timeout of the call to the DNS server for
+   MX records.
+ * For the SMTP validation, the timeout is divided by the number of retries.
 
 ```elixir
-# config/config.exs
-config :email_checker, default_dns: {4,2,2,1}
+# config/config.exs -- example personalized configuration
+config :email_checker,
+  default_dns: {4, 2, 2, 1},
+  smtp_retries: 1,
+  timeout_milliseconds: 6000
 ```
 
 ### Usage
