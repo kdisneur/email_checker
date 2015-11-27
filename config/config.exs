@@ -15,7 +15,21 @@ use Mix.Config
 #       format: "$date $time [$level] $metadata$message\n",
 #       metadata: [:user_id]
 
-config :email_checker, default_dns: {4, 2, 2, 1}
+## email_checker
+# default_dns, {non_neg_integer,non_neg_integer,non_neg_integer,non_neg_integer}
+#  * This sets which DNS server to use by default
+#  * default: {8,8,8,8} - 8.8.8.8 is Google's primary public DNS server
+# smtp_retries, non_neg_integer
+#  * Maximum amount of retries to use during the SMTP validation strategy execution
+#  * default: 2
+# timeout_milliseconds, :infinity | non_neg_integer
+#  * Maximum amount of time to use during MX or SMTP validation strategy executions
+#  * timeout as non_neg_integer is in **milliseconds**
+#  * default: :infinity
+config :email_checker,
+  default_dns: {8, 8, 8, 8},
+  smtp_retries: 2,
+  timeout_milliseconds: :infinity
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
