@@ -16,9 +16,15 @@ use Mix.Config
 #       metadata: [:user_id]
 
 ## email_checker
-# default_dns, {non_neg_integer,non_neg_integer,non_neg_integer,non_neg_integer}
+# default_dns, :system_default | {non_neg_integer,non_neg_integer,non_neg_integer,non_neg_integer}
 #  * This sets which DNS server to use by default
-#  * default: {8,8,8,8} - 8.8.8.8 is Google's primary public DNS server
+#  * default: :system_default (uses whatever is configured by default on the system)
+# also_dns, [] | [{non_neg_integer,non_neg_integer,non_neg_integer,non_neg_integer}]
+#  * This adds DNS servers to also check for name resolution
+#  * default: []
+# validations
+#  * This allows a developer to constrain the validations that are run globally to a limited subset
+#  * default: [Format,MX,SMTP]
 # smtp_retries, non_neg_integer
 #  * Maximum amount of retries to use during the SMTP validation strategy execution
 #  * default: 2
@@ -27,7 +33,9 @@ use Mix.Config
 #  * timeout as non_neg_integer is in **milliseconds**
 #  * default: :infinity
 config :email_checker,
-  default_dns: {8, 8, 8, 8},
+  default_dns: :system,
+  also_dns: [],
+  validatons: [Format,MX,SMTP],
   smtp_retries: 2,
   timeout_milliseconds: :infinity
 
@@ -36,5 +44,5 @@ config :email_checker,
 # by uncommenting the line below and defining dev.exs, test.exs and such.
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
-#
-#     import_config "#{Mix.env}.exs"
+
+import_config "#{Mix.env}.exs"

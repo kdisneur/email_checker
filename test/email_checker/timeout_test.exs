@@ -1,6 +1,10 @@
 defmodule EmailChecker.TimeoutTest do
   use ExUnit.Case, async: false
 
+  setup do
+   EmailChecker.TestEnv.setup_default_application_env
+  end
+
   # start/stop timer strategy ported from Erlang lib/kernel/src/inet.erl
   @spec stop_timer(nil) :: true
   @spec stop_timer(reference) :: boolean
