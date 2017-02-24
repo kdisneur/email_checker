@@ -3,7 +3,8 @@ defmodule EmailChecker.SMTP do
     valid?(email, 2)
   end
 
-  defp valid?(email, retries) when retries == 0 do
+  defp valid?(email, retries)
+  defp valid?(_, 0) do
     false
   end
   defp valid?(email, retries) do
