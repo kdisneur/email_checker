@@ -1,23 +1,17 @@
 defmodule EmailChecker do
-  @validations [
-    &EmailChecker.Format.valid?/1,
-    &EmailChecker.MX.valid?/1,
-    &EmailChecker.SMTP.valid?/1,
-  ]
 
-  def valid?(email) do
-    expected_length =
-      validations() |> length
+  defp configured_validations do
+    strategies = Application.get_env(:email_checker, :validations, [Format, MX, SMTP])
+    for strategy <- strategies, do: &Module.concat(EmailChecker, strategy).valid?/1
+  end
 
-    case validations() |> Stream.take_while(&( &1.(email) )) |> Enum.to_list do
-      list when length(list) == expected_length ->
-        true
-      _ ->
-        false
+  def valid?(email, validations \\ configured_validations())
+  def valid?(email, [validation | tail]) do
+    if validation.(email) do
+      valid?(email, tail)
+    else
+      false
     end
   end
-
-  defp validations do
-    @validations
-  end
+  def valid?(_, []), do: true
 end
