@@ -1,5 +1,5 @@
 defmodule EmailCheckerTest do
-  use ExUnit.Case
+  use EmailChecker.SMTPCase, async: false
 
   test "valid?: an invalid email format returns false" do
     assert false == EmailChecker.valid?("invalid-email")
@@ -10,10 +10,14 @@ defmodule EmailCheckerTest do
   end
 
   test "valid?: a non-existing email address returns false" do
-    assert false == EmailChecker.valid?("non-existent-user@disneur.me")
+    with_mocks invalid_mock() do
+      assert false == EmailChecker.valid?("non-existent-user@disneur.me")
+    end
   end
 
   test "valid?: an existing email address returns true" do
-    assert true == EmailChecker.valid?("kevin@disneur.me")
+    with_mocks valid_mock() do
+      assert true == EmailChecker.valid?("kevin@disneur.me")
+    end
   end
 end
