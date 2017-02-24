@@ -16,15 +16,15 @@ use Mix.Config
 #       metadata: [:user_id]
 
 ## email_checker
-# default_dns, :system_default | {non_neg_integer,non_neg_integer,non_neg_integer,non_neg_integer}
+# default_dns, :system_default | {non_neg_integer, non_neg_integer, non_neg_integer, non_neg_integer}
 #  * This sets which DNS server to use by default
 #  * default: :system_default (uses whatever is configured by default on the system)
-# also_dns, [] | [{non_neg_integer,non_neg_integer,non_neg_integer,non_neg_integer}]
+# also_dns, [] | [{non_neg_integer, non_neg_integer, non_neg_integer, non_neg_integer}]
 #  * This adds DNS servers to also check for name resolution
 #  * default: []
 # validations
 #  * This allows a developer to constrain the validations that are run globally to a limited subset
-#  * default: [Format,MX,SMTP]
+#  * default: [Format, MX, SMTP]
 # smtp_retries, non_neg_integer
 #  * Maximum amount of retries to use during the SMTP validation strategy execution
 #  * default: 2
@@ -35,7 +35,7 @@ use Mix.Config
 config :email_checker,
   default_dns: :system,
   also_dns: [],
-  validatons: [Format,MX,SMTP],
+  validations: [Format, MX, SMTP],
   smtp_retries: 2,
   timeout_milliseconds: :infinity
 

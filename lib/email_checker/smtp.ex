@@ -1,7 +1,7 @@
 defmodule EmailChecker.SMTP do
 
-  defp max_retries(), do: Application.get_env(:email_checker, :smtp_retries, 2)
-  defp max_timeout(), do: Application.get_env(:email_checker, :timeout_milliseconds, :infinity)
+  defp max_retries, do: Application.get_env(:email_checker, :smtp_retries, 2)
+  defp max_timeout, do: Application.get_env(:email_checker, :timeout_milliseconds, :infinity)
 
   def valid?(email) do
     valid?(email, max_retries())
@@ -31,15 +31,17 @@ defmodule EmailChecker.SMTP do
     |> EmailChecker.MX.lookup
   end
 
-  defp timeout_opt() do
-    case max_timeout do
-      :infinity            -> :infinity
-      t when is_integer(t) -> t |> div(max_retries) |> abs
+  defp timeout_opt do
+    case max_timeout() do
+      :infinity ->
+        :infinity
+      t when is_integer(t) ->
+        t |> div(max_retries()) |> abs
     end
   end
 
   def smtp_reply(email) do
-    opts = [packet: :line, timeout: timeout_opt]
+    opts = [packet: :line, timeout: timeout_opt()]
     socket =
       email
       |> mx_address

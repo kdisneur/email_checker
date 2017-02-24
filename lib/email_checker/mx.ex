@@ -1,6 +1,6 @@
 defmodule EmailChecker.MX do
 
-  defp max_timeout(), do: Application.get_env(:email_checker, :timeout_milliseconds, :infinity)
+  defp max_timeout, do: Application.get_env(:email_checker, :timeout_milliseconds, :infinity)
 
   def valid?(email) do
     email
@@ -21,7 +21,7 @@ defmodule EmailChecker.MX do
   defp lookup_all(domain_name) do
     domain_name
     |> String.to_char_list
-    |> :inet_res.lookup(:in, :mx, [], max_timeout)
+    |> :inet_res.lookup(:in, :mx, [], max_timeout())
     |> normalize_mx_records_to_string
   end
 
@@ -34,8 +34,8 @@ defmodule EmailChecker.MX do
   defp normalize_mx_records_to_string([], normalized_domains) do
     normalized_domains
   end
-  defp normalize_mx_records_to_string([{ priority, domain }|domains], normalized_domains) do
-    normalize_mx_records_to_string(domains, [{ priority, to_string(domain)}|normalized_domains])
+  defp normalize_mx_records_to_string([{ priority, domain } | domains], normalized_domains) do
+    normalize_mx_records_to_string(domains, [{ priority, to_string(domain)} | normalized_domains])
   end
 
   defp present?(nil) do
