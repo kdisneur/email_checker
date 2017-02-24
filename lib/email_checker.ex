@@ -7,9 +7,9 @@ defmodule EmailChecker do
 
   def valid?(email) do
     expected_length =
-      validations |> length
+      validations() |> length
 
-    case validations |> Stream.take_while(&( &1.(email) )) |> Enum.to_list do
+    case validations() |> Stream.take_while(&( &1.(email) )) |> Enum.to_list do
       list when length(list) == expected_length ->
         true
       _ ->
