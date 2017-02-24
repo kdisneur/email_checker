@@ -43,7 +43,7 @@ end
 config :email_checker,
   default_dns: :system,
   also_dns: [],
-  validations: [Format,MX,SMTP],
+  validations: [Format, MX, SMTP],
   smtp_retries: 2,
   timeout_milliseconds: :infinity
 ```
@@ -51,7 +51,7 @@ config :email_checker,
 In the test environment, we need to manually load DNS records to validate if an
 MX exists or not. When we load the library Erlang doesn't have its DNS record
 list yet. So to avoid any problem, we define a default DNS. By default the value
-for the test environment is : `{8,8,8,8}`, which is Google's primary public
+for the test environment is : `{8, 8, 8, 8}`, which is Google's primary public
 DNS server. If you find that you have odd failures in name resolution, you may
 have to specify a default DNS server.
 

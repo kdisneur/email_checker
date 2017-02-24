@@ -1,5 +1,5 @@
 defmodule EmailChecker.Format do
   def valid?(email) do
-    Regex.match?(EmailChecker.Tools.email_regex, email)
+    email =~ EmailChecker.Tools.email_regex
   end
 end

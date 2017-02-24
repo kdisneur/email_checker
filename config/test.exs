@@ -5,8 +5,8 @@ use Mix.Config
 # up yet.
 
 config :email_checker,
-  default_dns: {8,8,8,8},
-  also_dns: [{8,8,4,4}],
-  validatons: [Format,MX,SMTP],
+  default_dns: {8, 8, 8, 8},
+  also_dns: [{8, 8, 4, 4}],
+  validations: [Format, MX, SMTP],
   smtp_retries: 2,
   timeout_milliseconds: :infinity

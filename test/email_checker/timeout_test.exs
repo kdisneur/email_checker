@@ -12,7 +12,7 @@ defmodule EmailChecker.TimeoutTest do
   @spec start_timer(non_neg_integer) :: reference
 
   defp start_timer(:infinity), do: nil
-  defp start_timer(timeout), do: :erlang.start_timer(timeout, self, :tooslow)
+  defp start_timer(timeout), do: :erlang.start_timer(timeout, self(), :tooslow)
 
   defp stop_timer(nil), do: true
   defp stop_timer(timer) do
