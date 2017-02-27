@@ -61,7 +61,7 @@ defmodule EmailChecker.Mixfile do
       maintainers: ["Kevin Disneur"],
       licenses: ["MIT"],
       links: %{
-        "GitHub" => "https://github.com/kdisneur/email_checker"
+        "GitHub" => "https://github.com/jshmrtn/email_checker"
       }
     ]
   end
