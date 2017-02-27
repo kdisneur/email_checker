@@ -1,4 +1,6 @@
 defmodule EmailChecker.Loader do
+  @moduledoc false
+
   use Application
 
   defp default_dns do

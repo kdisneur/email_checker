@@ -1,17 +1,28 @@
-defmodule EmailChecker.SMTP do
+defmodule EmailChecker.Check.SMTP do
+  @moduledoc """
+  Check if an emails server is aknowledging an email address.
+  """
 
-  defp max_retries, do: Application.get_env(:email_checker, :smtp_retries, 2)
-  defp max_timeout, do: Application.get_env(:email_checker, :timeout_milliseconds, :infinity)
+  @behaviour EmailChecker.Check
 
-  def valid?(email) do
-    valid?(email, max_retries())
-  end
+  @doc """
+  Check if an emails server is aknowledging an email address.
 
-  defp valid?(email, retries)
-  defp valid?(_, 0) do
+  ## Parameters
+
+    * `email` - `binary` - the email to check
+    * `retries` - `non_neg_integer` - max retries (default from config)
+
+  ## Example
+
+    iex> EmailChecker.Check.SMTP.valid?("test@gmail.com")
     false
-  end
-  defp valid?(email, retries) do
+
+  """
+  def valid?(email, retries \\ max_retries())
+  def valid?(email, retries)
+  def valid?(_, 0), do: false
+  def valid?(email, retries) do
     try do
       case smtp_reply(email) do
         nil ->
@@ -28,7 +39,7 @@ defmodule EmailChecker.SMTP do
   defp mx_address(email) do
     email
     |> EmailChecker.Tools.domain_name
-    |> EmailChecker.MX.lookup
+    |> EmailChecker.Tools.lookup
   end
 
   defp timeout_opt do
@@ -57,4 +68,7 @@ defmodule EmailChecker.SMTP do
     socket |> Socket.Stream.send!("rcpt to:<#{email}>\r\n")
     socket |> Socket.Stream.recv!
   end
+
+  defp max_retries, do: Application.get_env(:email_checker, :smtp_retries, 2)
+  defp max_timeout, do: Application.get_env(:email_checker, :timeout_milliseconds, :infinity)
 end
