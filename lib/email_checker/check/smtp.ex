@@ -15,8 +15,8 @@ defmodule EmailChecker.Check.SMTP do
 
   ## Example
 
-    iex> EmailChecker.Check.SMTP.valid?("test@gmail.com")
-    false
+      iex> EmailChecker.Check.SMTP.valid?("test@gmail.com")
+      false
 
   """
   def valid?(email, retries \\ max_retries())

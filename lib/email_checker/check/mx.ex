@@ -14,11 +14,11 @@ defmodule EmailChecker.Check.MX do
 
   ## Example
 
-    iex> EmailChecker.Check.MX.valid?("test@gmail.com")
-    true
+      iex> EmailChecker.Check.MX.valid?("test@gmail.com")
+      true
 
-    iex> EmailChecker.Check.MX.valid?("test@invalid-domains-foobar.com")
-    true
+      iex> EmailChecker.Check.MX.valid?("test@invalid-domains-foobar.com")
+      true
 
   """
   def valid?(email) do

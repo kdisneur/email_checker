@@ -14,11 +14,11 @@ defmodule EmailChecker.Check.Format do
 
   ## Example
 
-    iex> EmailChecker.Check.Format.valid?("test@test.ch")
-    true
+      iex> EmailChecker.Check.Format.valid?("test@test.ch")
+      true
 
-    iex> EmailChecker.Check.Format.valid?("something")
-    false
+      iex> EmailChecker.Check.Format.valid?("something")
+      false
 
   """
   def valid?(email) do

@@ -18,8 +18,8 @@ defmodule EmailChecker do
 
   ## Example
 
-    iex> EmailChecker.valid?("test@test.ch", [EmailChecker.Check.Format])
-    true
+      iex> EmailChecker.valid?("test@test.ch", [EmailChecker.Check.Format])
+      true
 
   """
   def valid?(email, validations \\ configured_validations())
