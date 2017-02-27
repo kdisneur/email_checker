@@ -41,7 +41,8 @@ defmodule EmailChecker.Mixfile do
      {:mock, "~> 0.2.0", only: :test},
      {:ex_doc, ">= 0.0.0", only: :dev},
      {:inch_ex, ">= 0.0.0", only: :docs},
-     {:excoveralls, "~> 0.6", only: :test}]
+     {:excoveralls, "~> 0.6", only: :test},
+     {:credo, "~> 0.5", only: [:dev, :test]}]
   end
 
   defp description do

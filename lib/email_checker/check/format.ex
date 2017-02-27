@@ -3,6 +3,8 @@ defmodule EmailChecker.Check.Format do
   Check if a binary is formatted like an email.
   """
 
+  alias EmailChecker.Tools
+
   @behaviour EmailChecker.Check
 
   @doc """
@@ -21,7 +23,8 @@ defmodule EmailChecker.Check.Format do
       false
 
   """
+  @spec valid?(String.t) :: boolean
   def valid?(email) do
-    email =~ EmailChecker.Tools.email_regex
+    email =~ Tools.email_regex
   end
 end

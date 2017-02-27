@@ -3,6 +3,8 @@ defmodule EmailChecker.Check.MX do
   Check if an emails server has a valid MX record.
   """
 
+  alias EmailChecker.Tools
+
   @behaviour EmailChecker.Check
 
   @doc """
@@ -21,10 +23,11 @@ defmodule EmailChecker.Check.MX do
       true
 
   """
+  @spec valid?(String.t) :: boolean
   def valid?(email) do
     email
-    |> EmailChecker.Tools.domain_name
-    |> EmailChecker.Tools.lookup
+    |> Tools.domain_name
+    |> Tools.lookup
     |> present?
   end
 
