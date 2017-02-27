@@ -1,5 +1,5 @@
 defmodule EmailChecker.TimeoutTest do
-  use ExUnit.Case, async: false
+  use EmailChecker.SMTPCase, async: false
 
   setup do
    EmailChecker.TestEnv.setup_default_application_env
@@ -31,29 +31,33 @@ defmodule EmailChecker.TimeoutTest do
   end
 
   test "timeout: :infinity works for known good email address and servers" do
-    timeout = :infinity
-    Application.put_env(:email_checker, :timeout_milliseconds, timeout)
-    Application.put_env(:email_checker, :smtp_retries, 1)
+    with_mocks valid_mock() do
+      timeout = :infinity
+      Application.put_env(:email_checker, :timeout_milliseconds, timeout)
+      Application.put_env(:email_checker, :smtp_retries, 1)
 
-    timer = start_timer(timeout)
-    result = EmailChecker.valid? "kevin@disneur.me"
-    timer_not_fired = stop_timer(timer)
+      timer = start_timer(timeout)
+      result = EmailChecker.valid? "kevin@disneur.me"
+      timer_not_fired = stop_timer(timer)
 
-    assert timer_not_fired
-    assert result
+      assert timer_not_fired
+      assert result
+    end
   end
 
   test "timeout: non_neg_integer works for known good email address and servers" do
-    timeout = 5000
-    Application.put_env(:email_checker, :timeout_milliseconds, timeout)
-    Application.put_env(:email_checker, :smtp_retries, 1)
+    with_mocks valid_mock() do
+      timeout = 5000
+      Application.put_env(:email_checker, :timeout_milliseconds, timeout)
+      Application.put_env(:email_checker, :smtp_retries, 1)
 
-    timer = start_timer(timeout)
-    result = EmailChecker.valid? "kevin@disneur.me"
-    timer_not_fired = stop_timer(timer)
+      timer = start_timer(timeout)
+      result = EmailChecker.valid? "kevin@disneur.me"
+      timer_not_fired = stop_timer(timer)
 
-    assert timer_not_fired
-    assert result
+      assert timer_not_fired
+      assert result
+    end
   end
 
   test "timeout: non_neg_integer works to quickly return from checking a known bad email address or server" do
