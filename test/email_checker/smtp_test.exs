@@ -1,11 +1,15 @@
 defmodule EmailChecker.SMTPTest do
-  use ExUnit.Case
+  use EmailChecker.SMTPCase, async: false
 
   test "valid?: a valid SMTP record returns true" do
-    assert true == EmailChecker.SMTP.valid?("kevin@disneur.me")
+    with_mocks valid_mock() do
+      assert true == EmailChecker.SMTP.valid?("kevin@disneur.me")
+    end
   end
 
   test "valid?: an invalid SMTP record returns false" do
-    assert false == EmailChecker.SMTP.valid?("non-existing@disneur.me")
+    with_mocks invalid_mock() do
+      assert false == EmailChecker.SMTP.valid?("non-existing@disneur.me")
+    end
   end
 end
