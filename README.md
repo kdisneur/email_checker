@@ -100,7 +100,7 @@ EmailChecker.valid?("non-existing@disneur.me")
 
 ### CHANGELOG
 
-[CHANGELOG](https://github.com/kdisneur/email_checker/blob/master/CHANGELOG)
+[CHANGELOG](https://github.com/kdisneur/email_checker/blob/master/CHANGELOG.md)
 
 ### LICENSE
 
