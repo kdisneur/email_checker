@@ -1,3 +1,5 @@
 %{"bunt": {:hex, :bunt, "0.1.4"},
   "credo": {:hex, :credo, "0.1.7"},
-  "socket": {:hex, :socket, "0.3.1"}}
+  "meck": {:hex, :meck, "0.8.4", "59ca1cd971372aa223138efcf9b29475bde299e1953046a0c727184790ab1520", [:make, :rebar], []},
+  "mock": {:hex, :mock, "0.2.1", "bfdba786903e77f9c18772dee472d020ceb8ef000783e737725a4c8f54ad28ec", [:mix], [{:meck, "~> 0.8.2", [hex: :meck, optional: false]}]},
+  "socket": {:hex, :socket, "0.3.1", "c17c6da3f85ae07b730fcfa3b9b44051e1f7cbd5c202c46ea926493004d4cc18", [:mix], []}}
